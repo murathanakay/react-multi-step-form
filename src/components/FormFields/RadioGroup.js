@@ -9,7 +9,6 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
     <Field name={name}>
       {({field, form, meta}) => {
         const isError = meta.error;
-
         return (
           <div className="relative mb-8">
             {label && (
@@ -18,7 +17,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
               </h3>
             )}
             <ul
-              className={`items-center w-full text-md font-medium text-gray-900 bg-white border  rounded-lg sm:flex dark:bg-gray-700  dark:text-white ${
+              className={`items-center w-full font-medium text-gray-900 bg-white border  rounded-lg sm:flex dark:bg-gray-700  dark:text-white ${
                 isError
                   ? "border-red-700 dark:border-red-500"
                   : "border-gray-400 dark:border-gray-600"
@@ -26,7 +25,6 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
             >
               {options.map((option, i) => {
                 const isObj = typeof option === "object";
-
                 const id = uniqueId();
 
                 return (
@@ -59,17 +57,13 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
                             });
                           }
 
-                          if (props.action) {
-                            props.action(e);
-                          }
-
                           field.onChange(e);
                         }}
                         autoComplete="off"
                       />
                       <label
                         htmlFor={`radio-${id}`}
-                        className={`w-full py-5 ms-2 text-md font-medium  ${
+                        className={`w-full py-5 ms-2 font-medium  ${
                           isError
                             ? "text-red-700 dark:text-red-500"
                             : "text-gray-900 dark:text-gray-300"
@@ -110,7 +104,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
 };
 
 RadioGroup.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
