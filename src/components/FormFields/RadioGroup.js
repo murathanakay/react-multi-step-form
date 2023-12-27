@@ -1,0 +1,124 @@
+import React from "react";
+
+import {Field} from "formik";
+import PropTypes from "prop-types";
+import uniqueId from "lodash/uniqueId";
+
+const RadioGroup = ({name, options, label, setState, ...props}) => {
+  return (
+    <Field name={name}>
+      {({field, form, meta}) => {
+        const isError = meta.error;
+
+        return (
+          <div className="relative mb-8">
+            {label && (
+              <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+                {label}
+              </h3>
+            )}
+            <ul
+              className={`items-center w-full text-md font-medium text-gray-900 bg-white border  rounded-lg sm:flex dark:bg-gray-700  dark:text-white ${
+                isError
+                  ? "border-red-700 dark:border-red-500"
+                  : "border-gray-400 dark:border-gray-600"
+              }`}
+            >
+              {options.map((option, i) => {
+                const isObj = typeof option === "object";
+
+                const id = uniqueId();
+
+                return (
+                  <li
+                    className={`w-full ${
+                      isError
+                        ? "border-red-700 dark:border-red-500"
+                        : "border-gray-400 dark:border-gray-600"
+                    } ${
+                      options.length === i + 1
+                        ? "border-0"
+                        : "border-b sm:border-b-0 sm:border-r"
+                    }`}
+                  >
+                    <div className="flex items-center ps-3">
+                      <Field
+                        type="radio"
+                        id={`radio-${id}`}
+                        {...field}
+                        className={`w-4 h-4 focus:ring-2 text-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500 ${
+                          isError
+                            ? "border-red-400 dark:border-red-500 bg-red-50"
+                            : "bg-gray-100 border-gray-400"
+                        }`}
+                        value={isObj ? option.value : option}
+                        onChange={(e) => {
+                          if (setState) {
+                            setState((prev) => {
+                              return e.target.value;
+                            });
+                          }
+
+                          if (props.action) {
+                            props.action(e);
+                          }
+
+                          field.onChange(e);
+                        }}
+                        autoComplete="off"
+                      />
+                      <label
+                        htmlFor={`radio-${id}`}
+                        className={`w-full py-5 ms-2 text-md font-medium  ${
+                          isError
+                            ? "text-red-700 dark:text-red-500"
+                            : "text-gray-900 dark:text-gray-300"
+                        }`}
+                        key={
+                          isObj
+                            ? option.key
+                              ? option.key
+                              : option.value
+                            : option
+                        }
+                      >
+                        <span className="ms-2">
+                          {isObj ? option.text : option}
+                        </span>
+                      </label>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <div
+              className={`overflow-hidden transition-all duration-300 absolute left-3 bg-white ${
+                isError ? "h-[24px]" : "h-0"
+              }`}
+            >
+              {isError ? (
+                <span className="text-[12px] font-extralight text-red-700 dark:text-red-500">
+                  {meta.error}
+                </span>
+              ) : null}
+            </div>
+          </div>
+        );
+      }}
+    </Field>
+  );
+};
+
+RadioGroup.propTypes = {
+  label: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      value: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
+export {RadioGroup};

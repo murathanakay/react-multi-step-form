@@ -1,3 +1,4 @@
 import {TextInput} from "./TextInput";
+import {RadioGroup} from "./RadioGroup";
 
-export {TextInput};
+export {TextInput, RadioGroup};
