@@ -9,7 +9,9 @@
 
 ## About <a name = "about"></a>
 
-a small multi-step-form app project.
+a simple multi-step-form project with using the following framework(s)/package(s):
+
+<a href="https://react.dev/">React</a>
 
 will be edited...
 
