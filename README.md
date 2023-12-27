@@ -11,7 +11,7 @@
 
 a simple multi-step-form project with using the following framework(s)/package(s):
 
-<a href="https://react.dev/">React</a>
+<a href="https://react.dev/" target="_blank">React</a>
 
 will be edited...
 
