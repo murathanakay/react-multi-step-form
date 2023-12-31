@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
 import {Formik, Form} from "formik";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
@@ -8,18 +8,27 @@ import WizardButtons from "./WizardButtons";
 import {DisplayFormikState, novalidate} from "../../helper";
 
 const Wizard = (props) => {
-  const [formSending, setFormSending] = useState(false);
-  const [formSent, setFormSent] = useState(false);
-
   const [state, setState] = useState({
     step: 0,
   });
 
   const schema = novalidate() ? {} : props.validationSchemas[state.step];
+  const [validateSchema, setValidateSchema] = useState(schema);
+
+  const handleUpdateSchema = (key, value) => {
+    setValidateSchema((prevState) => {
+      return {...prevState, ...{[key]: value}};
+    });
+  };
+
+  const [formSending, setFormSending] = useState(false);
+  const [formSent, setFormSent] = useState(false);
 
   const initialValues = props.initialValues.reduce((item, total) => {
     return {...item, ...total};
   });
+
+  console.log("validateSchema", validateSchema);
 
   const FormComponent = props.formComponents[state.step];
   const lastStep = props.formComponents.length - 1;
@@ -51,20 +60,20 @@ const Wizard = (props) => {
     <>
       {!formSent ? (
         <>
-          <div className="max-w-screen-sm mx-auto mt-10 mb-5">
+          <div className="container max-w-screen-md mx-auto mt-10 mb-5">
             <WizardStepper steps={props.formHeaderSteps} stepNum={state.step} />
             <div className="mb-3 font-light text-xs text-right text-gray-400 dark:text-gray-600">
               * is required field
             </div>
           </div>
-          <div className="max-w-screen-sm mx-auto">
+          <div className="container max-w-screen-md mx-auto">
             <Formik
-              validateOnBlur={false}
+              // validateOnBlur={false}
               // enableReinitialize={true}
-              // validateOnMount={true}
+              validateOnMount={true}
               validateOnChange={true}
               initialValues={initialValues}
-              validationSchema={Yup.object().shape(schema)}
+              validationSchema={Yup.object().shape(validateSchema)}
               onSubmit={(values, {setSubmitting, setFieldTouched, ...rest}) => {
                 setTimeout(() => {
                   setSubmitting(false);
@@ -88,6 +97,7 @@ const Wizard = (props) => {
                   <Form className="mt-5">
                     {React.createElement(FormComponent, {
                       ...props,
+                      handleUpdateSchema,
                     })}
 
                     <WizardButtons
