@@ -2,10 +2,10 @@ import React, {useState} from "react";
 
 import {Field} from "formik";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import {uniqueId} from "lodash";
 
 const TextInput = ({label, name, ...props}) => {
-  const id = uniqueId();
+  const id = uniqueId("text");
   return (
     <Field name={name}>
       {({field, form, meta}) => {
@@ -14,7 +14,7 @@ const TextInput = ({label, name, ...props}) => {
         return (
           <div class="relative z-0 w-full mb-8 group">
             <input
-              id={`text-${id}`}
+              id={id}
               type="text"
               {...field}
               className={`block px-4 py-5 w-full font-medium border rounded-lg appearance-none text-gray-900 dark:text-white  focus:outline-none focus:ring-0 transition-colors duration-300 bg-white bg-opacity-20 focus:bg-opacity-100caret-slate-600 ${
@@ -25,9 +25,13 @@ const TextInput = ({label, name, ...props}) => {
               placeholder=""
               title={props.desc ? props.desc : label}
               {...props}
+              onFocus={(e) => {
+                form.setFieldTouched(field.name);
+                field.onChange(e);
+              }}
             />
             <label
-              htmlFor={`text-${id}`}
+              htmlFor={id}
               className={`peer-focus:font-medium absolute duration-200 transform -translate-y-8 bg-white scale-75 top-5 left-4 z-10 origin-[0] peer-focus:start-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-8 peer peer-focus:bg-white ${
                 isError
                   ? "text-red-700 dark:text-red-500 peer-focus:text-red-700 peer-focus:dark:text-red-500"
