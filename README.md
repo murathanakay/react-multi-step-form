@@ -11,7 +11,11 @@
 
 a simple multi-step-form project with using the following framework(s)/package(s):
 
-<a href="https://react.dev/" target="_blank">React</a>
+<a href="https://react.dev/">React</a>
+
+<a href="https://tailwindcss.com/">Tailwindcss</a> for styling
+<a href="https://formik.org/">Formik</a> to create form
+<a href="https://github.com/jquense/yup">jquense/yup</a> to validate form fields
 
 will be edited...
 
