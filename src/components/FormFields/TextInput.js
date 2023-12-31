@@ -17,7 +17,7 @@ const TextInput = ({label, name, ...props}) => {
               id={id}
               type="text"
               {...field}
-              className={`block px-4 py-5 w-full font-medium border rounded-lg appearance-none text-gray-900 dark:text-white  focus:outline-none focus:ring-0 transition-colors duration-300 bg-white bg-opacity-20 focus:bg-opacity-100caret-slate-600 ${
+              className={`block px-4 py-5 w-full font-medium border rounded-lg appearance-none text-gray-900 dark:text-white  focus:outline-none focus:ring-0 transition-colors duration-300 bg-transparent focus:bg-white dark:bg-transparent dark:focus:bg-gray-700 caret-slate-600 ${
                 isError
                   ? "border-red-700 dark:border-red-500 dark:focus:border-red-500 focus:border-red-600"
                   : "border-gray-400 dark:border-gray-600 dark:focus:border-gray-500 focus:border-gray-900"
@@ -25,10 +25,10 @@ const TextInput = ({label, name, ...props}) => {
               placeholder=""
               title={props.desc ? props.desc : label}
               {...props}
-              onFocus={(e) => {
-                form.setFieldTouched(field.name);
-                field.onChange(e);
-              }}
+              // onFocus={(e) => {
+              //   form.setFieldTouched(field.name);
+              //   field.onChange(e);
+              // }}
             />
             <label
               htmlFor={id}

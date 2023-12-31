@@ -10,7 +10,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
       {({field, form, meta}) => {
         const isError = meta.error && meta.touched;
         return (
-          <div className="relative mb-8">
+          <div className="relative mb-10">
             {label && (
               <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
                 {label}
