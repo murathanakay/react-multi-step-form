@@ -2,13 +2,13 @@ import React from "react";
 
 import {Field} from "formik";
 import PropTypes from "prop-types";
-import uniqueId from "lodash/uniqueId";
+import {uniqueId} from "lodash";
 
 const RadioGroup = ({name, options, label, setState, ...props}) => {
   return (
     <Field name={name}>
       {({field, form, meta}) => {
-        const isError = meta.error;
+        const isError = meta.error && meta.touched;
         return (
           <div className="relative mb-8">
             {label && (
@@ -25,7 +25,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
             >
               {options.map((option, i) => {
                 const isObj = typeof option === "object";
-                const id = uniqueId();
+                const id = uniqueId("radio");
 
                 return (
                   <li
@@ -42,7 +42,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
                     <div className="flex items-center ps-3">
                       <Field
                         type="radio"
-                        id={`radio-${id}`}
+                        id={id}
                         {...field}
                         className={`w-4 h-4 focus:ring-2 text-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 dark:bg-gray-600 dark:border-gray-500 ${
                           isError
@@ -62,7 +62,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
                         autoComplete="off"
                       />
                       <label
-                        htmlFor={`radio-${id}`}
+                        htmlFor={id}
                         className={`w-full py-5 ms-2 font-medium  ${
                           isError
                             ? "text-red-700 dark:text-red-500"
