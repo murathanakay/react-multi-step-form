@@ -4,7 +4,7 @@ import "yup-phone-lite";
 import {defaultCountries, usePhoneInput} from "react-international-phone";
 import {FastField, useFormikContext, useField} from "formik";
 import {isObject, isUndefined, uniqueId} from "lodash";
-import CountryListBox from "./PhoneInput/CountryListBox";
+import CountryListBox from "./CountryListBox";
 
 export const PhoneInput = ({name, label, handleUpdateSchema, ...restProps}) => {
   const form = useFormikContext();
