@@ -5,6 +5,7 @@ import {defaultCountries, usePhoneInput} from "react-international-phone";
 import {FastField, useFormikContext, useField} from "formik";
 import {isObject, isUndefined, uniqueId} from "lodash";
 import CountryListBox from "./CountryListBox";
+import ErrorText from "../common/ErrorText";
 
 export const PhoneInput = ({name, label, handleUpdateSchema, ...restProps}) => {
   const form = useFormikContext();
@@ -81,7 +82,7 @@ export const PhoneInput = ({name, label, handleUpdateSchema, ...restProps}) => {
               <div className="flex-1">
                 <input
                   {...field}
-                  className={`block border-none ps-0 pe-4 py-5 w-full rounded-lg font-medium text-gray-900 dark:text-white bg-transparent focus:outline-none focus:bg-transparent focus:ring-0 caret-slate-600`}
+                  className={`block border-none ps-0 pe-4 py-5 w-full rounded-lg font-medium text-gray-900 dark:text-white bg-transparent focus:outline-none focus:bg-transparent focus:ring-0 caret-gray-600`}
                   type="text"
                   name={name}
                   ref={inputRef}
@@ -101,7 +102,7 @@ export const PhoneInput = ({name, label, handleUpdateSchema, ...restProps}) => {
 
                 <label
                   // htmlFor={`phone-${id}`}
-                  className={`absolute duration-200 transform -translate-y-8 translate-x-0 bg-white scale-75 top-5 left-4 z-10  ${
+                  className={`font-medium absolute duration-200 transform -translate-y-8 translate-x-0 bg-white scale-75 top-5 left-1 z-10  ${
                     isError
                       ? "text-red-700 dark:text-red-500"
                       : "text-gray-900 dark:text-gray-800"
@@ -111,17 +112,7 @@ export const PhoneInput = ({name, label, handleUpdateSchema, ...restProps}) => {
                 </label>
               </div>
             </div>
-            <div
-              className={`overflow-hidden transition-all duration-300 absolute left-3 bg-white ${
-                isError ? "h-[24px]" : "h-0"
-              }`}
-            >
-              {isError ? (
-                <span className="text-[12px] font-extralight text-red-700 dark:text-red-500">
-                  {meta.error}
-                </span>
-              ) : null}
-            </div>
+            <ErrorText meta={meta} />
           </div>
         );
       }}

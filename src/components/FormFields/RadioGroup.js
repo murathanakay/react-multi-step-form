@@ -3,6 +3,7 @@ import React from "react";
 import {Field} from "formik";
 import PropTypes from "prop-types";
 import {uniqueId} from "lodash";
+import ErrorText from "./common/ErrorText";
 
 const RadioGroup = ({name, options, label, setState, ...props}) => {
   return (
@@ -17,10 +18,10 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
               </h3>
             )}
             <ul
-              className={`items-center w-full font-medium text-gray-900 bg-white border  rounded-lg sm:flex dark:bg-gray-700  dark:text-white ${
+              className={`items-center w-full font-medium text-gray-900 bg-white border  rounded-lg sm:flex dark:bg-transparent  dark:text-white ${
                 isError
                   ? "border-red-700 dark:border-red-500"
-                  : "border-gray-400 dark:border-gray-600"
+                  : "border-gray-400 dark:border-gray-800"
               }`}
             >
               {options.map((option, i) => {
@@ -85,17 +86,7 @@ const RadioGroup = ({name, options, label, setState, ...props}) => {
                 );
               })}
             </ul>
-            <div
-              className={`overflow-hidden transition-all duration-300 absolute left-3 bg-white ${
-                isError ? "h-[24px]" : "h-0"
-              }`}
-            >
-              {isError ? (
-                <span className="text-[12px] font-extralight text-red-700 dark:text-red-500">
-                  {meta.error}
-                </span>
-              ) : null}
-            </div>
+            <ErrorText meta={meta} />
           </div>
         );
       }}
