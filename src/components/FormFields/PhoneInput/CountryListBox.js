@@ -24,7 +24,7 @@ const CountryListBox = ({handleCountryChange, country}) => {
     <div className="self-stretch flex items-center">
       <Listbox value={selected} onChange={handleChange}>
         <div className="relative pt-1 ms-3 me-4">
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-gray-50 py-2 pl-2 pr-4 sm:text-sm">
+          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-gray-50 py-2 pl-3 pr-4 sm:text-sm">
             <span className="block truncate">
               <FlagImage iso2={selected} className="w-6 h-6 me-3" />
             </span>
@@ -55,7 +55,7 @@ const CountryListBox = ({handleCountryChange, country}) => {
                           : "text-gray-900"
                       } ${
                         active
-                          ? "!bg-amber-100 text-amber-900"
+                          ? "!bg-amber-100 !text-amber-900"
                           : "text-gray-900"
                       }`
                     }
@@ -64,13 +64,13 @@ const CountryListBox = ({handleCountryChange, country}) => {
                     {({selected}) => (
                       <>
                         <div
-                          className={`flex align-center ${
+                          className={`flex items-center truncate ${
                             selected ? "font-medium" : "font-normal"
                           }`}
                         >
                           <FlagImage
                             iso2={country.iso2}
-                            className="me-1 w-6 h-6"
+                            className="me-2 w-6 h-6"
                           />
                           {country.name} +{country.dialCode}
                         </div>
