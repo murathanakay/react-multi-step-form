@@ -21,7 +21,7 @@ module.exports = {
     "bg-gradient-to-l",
     "animate-gradient-text-background",
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: "class", // or 'media' or 'class'
   theme: {
     container: {
       padding: "2rem",
