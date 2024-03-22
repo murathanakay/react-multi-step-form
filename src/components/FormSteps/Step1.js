@@ -55,6 +55,8 @@ const Step1Form = {
       // .oneOf(["Male", "Female"])..etc
       .required("Must select one of the above."),
     "Phone Number": Yup.string(),
+
+    Birthday: Yup.string().required("Birthday is required."),
   },
 
   initialValues: {
