@@ -1,7 +1,8 @@
 import React from "react";
-import {PhoneInput, RadioGroup, TextInput} from "../FormFields";
+import {PhoneInput, RadioGroup, TextInput, DatePicker} from "../FormFields";
 
 import * as Yup from "yup";
+
 // import "yup-phone";
 
 const Step1 = (props) => {
@@ -14,6 +15,13 @@ const Step1 = (props) => {
       </div>
       <div className="grid grid-cols-1 md:gap-5">
         <RadioGroup name="Gender" options={genderOptions} />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
+        <DatePicker
+          label="Birthday"
+          name="Birthday"
+          maxDate={new Date("2005-01-01")}
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 md:gap-5">
         <PhoneInput
@@ -55,6 +63,7 @@ const Step1Form = {
     "E-mail": "",
     Gender: "",
     "Phone Number": "",
+    Birthday: "",
   },
 };
 
